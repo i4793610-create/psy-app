@@ -1,35 +1,80 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Онлайн Психолог</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн Психолог | Поддержка</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Шрифт для улучшенной типографики (похож на макет) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <!-- Главный заголовок -->
+        <header class="main-header">
+            <h1><i class="fas fa-brain"></i> Онлайн Психолог</h1>
+            <p class="subtitle">Поддержка и помощь в сложных ситуациях</p>
+        </header>
 
-<header class="header">Онлайн Психолог</header>
+        <!-- Блок с принципами работы -->
+        <section class="principles">
+            <div class="principle-card" id="confidentiality">
+                <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Конфиденциальность</h3>
+                <p>Ваши данные строго защищены и остаются конфиденциальными</p>
+            </div>
 
-<section class="hero">
-  <div class="hero-text">
-    <h2>Поддержка и помощь<br>в сложных ситуациях</h2>
-  </div>
-  <div class="hero-image"></div>
-</section>
+            <div class="principle-card" id="non-judgement">
+                <div class="icon"><i class="fas fa-heart"></i></div>
+                <h3>Безоценочность</h3>
+                <p>Вы можете говорить о своих чувствах и проблемах открыто и смело</p>
+            </div>
 
-<section class="advantages">
-  <div class="adv-card"><img src="icons/lock.svg"><p>Конфиденциальность</p></div>
-  <div class="adv-card"><img src="icons/heart.svg"><p>Безоценочность</p></div>
-  <div class="adv-card"><img src="icons/support.svg"><p>Поддержка</p></div>
-</section>
+            <div class="principle-card" id="support">
+                <div class="icon"><i class="fas fa-hands-helping"></i></div>
+                <h3>Поддержка</h3>
+                <p>Уважительное отношение и бережная психологическая помощь в сложных ситуациях</p>
+            </div>
+        </section>
 
-<section class="topics">
-  <button class="topic"><img src="icons/stress.svg"><span>Стресс</span></button>
-  <button class="topic"><img src="icons/anxiety.svg"><span>Тревога</span></button>
-  <button class="topic"><img src="icons/sleep.svg"><span>Сон</span></button>
-  <button class="topic"><img src="icons/relationships.svg"><span>Отношения</span></button>
-</section>
+        <!-- Разделитель -->
+        <div class="divider">
+            <span></span>
+        </div>
 
-<script src="app.js"></script>
+        <!-- Блок с темами для консультации -->
+        <section class="topics">
+            <h2>С какими запросами я помогу?</h2>
+            <p class="topics-subtitle">Выберите тему для начала беседы</p>
+            <div class="topics-grid">
+                <button class="topic-btn" data-topic="stress">
+                    <i class="fas fa-fire"></i> Стресс
+                </button>
+                <button class="topic-btn" data-topic="anxiety">
+                    <i class="fas fa-wind"></i> Тревога
+                </button>
+                <button class="topic-btn" data-topic="sleep">
+                    <i class="fas fa-moon"></i> Сон
+                </button>
+                <button class="topic-btn" data-topic="relationships">
+                    <i class="fas fa-users"></i> Отношения
+                </button>
+            </div>
+        </section>
+
+        <!-- Кнопка связи/старта (основное действие) -->
+        <footer class="main-action">
+            <button id="startBtn" class="start-button">
+                <i class="fas fa-comment-dots"></i> Начать беседу с психологом
+            </button>
+            <p class="disclaimer">Первая консультация (15 мин.) - бесплатно</p>
+        </footer>
+    </div>
+
+    <!-- Подключаем скрипт Telegram и наш -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
