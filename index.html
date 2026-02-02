@@ -3,78 +3,564 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Онлайн Психолог | Поддержка</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome для иконок -->
+    <title>Психолог Онлайн</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Шрифт для улучшенной типографики (похож на макет) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 16px;
+        }
+        
+        .choice-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .choice-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .ai-btn {
+            background: #4299e1;
+            color: white;
+        }
+        
+        .psych-btn {
+            background: #9f7aea;
+            color: white;
+        }
+        
+        .choice-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .choice-btn i {
+            font-size: 24px;
+            width: 40px;
+        }
+        
+        .info-box {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 5px solid #48bb78;
+        }
+        
+        .info-box h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #718096;
+            line-height: 1.5;
+        }
+        
+        .emergency {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .back-btn {
+            background: #a0aec0;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Главный заголовок -->
-        <header class="main-header">
-            <h1><i class="fas fa-brain"></i> Онлайн Психолог</h1>
-            <p class="subtitle">Поддержка и помощь в сложных ситуациях</p>
-        </header>
-
-        <!-- Блок с принципами работы -->
-        <section class="principles">
-            <div class="principle-card" id="confidentiality">
-                <div class="icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Конфиденциальность</h3>
-                <p>Ваши данные строго защищены и остаются конфиденциальными</p>
+        <!-- Главный экран -->
+        <div id="mainScreen">
+            <div class="header">
+                <h1><i class="fas fa-brain"></i> Психолог Онлайн</h1>
+                <p>Выберите способ помощи</p>
             </div>
-
-            <div class="principle-card" id="non-judgement">
-                <div class="icon"><i class="fas fa-heart"></i></div>
-                <h3>Безоценочность</h3>
-                <p>Вы можете говорить о своих чувствах и проблемах открыто и смело</p>
+            
+            <div class="choice-buttons">
+                <button class="choice-btn ai-btn" onclick="openAiChat()">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <div>🤖 ИИ-помощник</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Бесплатно • 24/7</div>
+                    </div>
+                </button>
+                
+                <button class="choice-btn psych-btn" onclick="openPsychologist()">
+                    <i class="fas fa-user-md"></i>
+                    <div>
+                        <div>👩 Психолог</div>
+                        <div style="font-size: 14px; opacity: 0.9;">15 мин бесплатно</div>
+                    </div>
+                </button>
             </div>
-
-            <div class="principle-card" id="support">
-                <div class="icon"><i class="fas fa-hands-helping"></i></div>
-                <h3>Поддержка</h3>
-                <p>Уважительное отношение и бережная психологическая помощь в сложных ситуациях</p>
+            
+            <div class="info-box">
+                <h3>Как это работает?</h3>
+                <p><strong>ИИ-помощник:</strong> Мгновенные ответы на вопросы о тревоге, стрессе, сне</p>
+                <p><strong>Психолог:</strong> Живая консультация с Александрой (10 лет опыта)</p>
             </div>
-        </section>
-
-        <!-- Разделитель -->
-        <div class="divider">
-            <span></span>
+            
+            <div class="emergency">
+                ⚠️ Если вам нужна срочная помощь, нажмите кнопку "Психолог"
+            </div>
         </div>
-
-        <!-- Блок с темами для консультации -->
-        <section class="topics">
-            <h2>С какими запросами я помогу?</h2>
-            <p class="topics-subtitle">Выберите тему для начала беседы</p>
-            <div class="topics-grid">
-                <button class="topic-btn" data-topic="stress">
-                    <i class="fas fa-fire"></i> Стресс
-                </button>
-                <button class="topic-btn" data-topic="anxiety">
-                    <i class="fas fa-wind"></i> Тревога
-                </button>
-                <button class="topic-btn" data-topic="sleep">
-                    <i class="fas fa-moon"></i> Сон
-                </button>
-                <button class="topic-btn" data-topic="relationships">
-                    <i class="fas fa-users"></i> Отношения
+        
+        <!-- Экран ИИ-чата -->
+        <div id="aiScreen" class="hidden">
+            <div class="header">
+                <h2><i class="fas fa-robot"></i> ИИ-помощник</h2>
+                <p>Отвечаю за 5 секунд</p>
+            </div>
+            
+            <div id="chatMessages" style="
+                height: 300px;
+                overflow-y: auto;
+                margin-bottom: 20px;
+                padding: 15px;
+                background: #f7fafc;
+                border-radius: 15px;
+            ">
+                <div style="background: #4299e1; color: white; padding: 10px; border-radius: 10px; margin-bottom: 10px; max-width: 80%;">
+                    Привет! Я ваш ИИ-помощник. Спросите меня о тревоге, стрессе, сне или отношениях.
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="messageInput" placeholder="Ваш вопрос..." style="
+                    flex: 1;
+                    padding: 15px;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 10px;
+                    font-size: 16px;
+                ">
+                <button onclick="sendMessage()" style="
+                    background: #4299e1;
+                    color: white;
+                    border: none;
+                    border-radius: 10px;
+                    padding: 0 20px;
+                    cursor: pointer;
+                ">
+                    <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
-        </section>
-
-        <!-- Кнопка связи/старта (основное действие) -->
-        <footer class="main-action">
-            <button id="startBtn" class="start-button">
-                <i class="fas fa-comment-dots"></i> Начать беседу с психологом
+            
+            <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <button onclick="quickQuestion('Как справиться с тревогой?')" style="
+                    background: #f7fafc;
+                    border: 1px solid #e2e8f0;
+                    padding: 10px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    text-align: left;
+                    font-size: 14px;
+                ">
+                    🌀 Тревога
+                </button>
+                <button onclick="quickQuestion('Не могу уснуть, что делать?')" style="
+                    background: #f7fafc;
+                    border: 1px solid #e2e8f0;
+                    padding: 10px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    text-align: left;
+                    font-size: 14px;
+                ">
+                    😴 Сон
+                </button>
+            </div>
+            
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Назад
             </button>
-            <p class="disclaimer">Первая консультация (15 мин.) - бесплатно</p>
-        </footer>
+        </div>
+        
+        <!-- Экран психолога -->
+        <div id="psychScreen" class="hidden">
+            <div class="header">
+                <h2><i class="fas fa-user-md"></i> Психолог</h2>
+                <p>Александра • 10 лет опыта</p>
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <div style="
+                    width: 100px;
+                    height: 100px;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    border-radius: 50%;
+                    margin: 0 auto 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 40px;
+                    color: white;
+                ">
+                    👩
+                </div>
+                <h3>Александра</h3>
+                <p>Когнитивно-поведенческий терапевт</p>
+            </div>
+            
+            <div class="info-box">
+                <p><strong>📚 Специализация:</strong> тревога, стресс, отношения</p>
+                <p><strong>⭐ Рейтинг:</strong> 4.9 (47 отзывов)</p>
+                <p><strong>🕐 Статус:</strong> <span style="color: green;">✓ онлайн сейчас</span></p>
+            </div>
+            
+            <div style="margin: 25px 0;">
+                <h3 style="margin-bottom: 15px;">Выберите консультацию:</h3>
+                <div style="display: grid; gap: 15px;">
+                    <button onclick="bookSession('free')" style="
+                        background: #48bb78;
+                        color: white;
+                        border: none;
+                        padding: 20px;
+                        border-radius: 15px;
+                        font-size: 18px;
+                        cursor: pointer;
+                        text-align: left;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    ">
+                        <div>
+                            <div>🆓 15 минут</div>
+                            <div style="font-size: 14px; opacity: 0.9;">Бесплатно • знакомство</div>
+                        </div>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <button onclick="bookSession('paid')" style="
+                        background: #9f7aea;
+                        color: white;
+                        border: none;
+                        padding: 20px;
+                        border-radius: 15px;
+                        font-size: 18px;
+                        cursor: pointer;
+                        text-align: left;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    ">
+                        <div>
+                            <div>💰 50 минут</div>
+                            <div style="font-size: 14px; opacity: 0.9;">2000₽ • полная сессия</div>
+                        </div>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Назад
+            </button>
+        </div>
+        
+        <!-- Экран записи -->
+        <div id="bookScreen" class="hidden">
+            <div class="header">
+                <h2><i class="fas fa-calendar-check"></i> Запись</h2>
+                <p id="sessionTypeText"></p>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="font-size: 60px; margin-bottom: 20px;">
+                    📅
+                </div>
+                <h3 id="sessionTitle"></h3>
+                <p id="sessionDesc" style="color: #718096; margin: 15px 0;"></p>
+                
+                <div style="background: #f7fafc; padding: 20px; border-radius: 15px; margin: 20px 0;">
+                    <p><strong>Психолог:</strong> Александра</p>
+                    <p><strong>Формат:</strong> Видеозвонок в Telegram</p>
+                    <p id="sessionPrice"></p>
+                </div>
+            </div>
+            
+            <button onclick="confirmBooking()" style="
+                background: #48bb78;
+                color: white;
+                border: none;
+                padding: 20px;
+                border-radius: 15px;
+                font-size: 18px;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom: 15px;
+            ">
+                <i class="fas fa-check-circle"></i> Подтвердить запись
+            </button>
+            
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Назад
+            </button>
+        </div>
     </div>
 
-    <!-- Подключаем скрипт Telegram и наш -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="app.js"></script>
+    <script>
+        // Telegram Mini App инициализация
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Раскрываем на весь экран
+        tg.ready();
+        
+        // Переменные
+        let currentSession = null;
+        const chatMessages = document.getElementById('chatMessages');
+        
+        // Навигация
+        function openAiChat() {
+            document.getElementById('mainScreen').classList.add('hidden');
+            document.getElementById('aiScreen').classList.remove('hidden');
+            tg.HapticFeedback.impactOccurred('light');
+        }
+        
+        function openPsychologist() {
+            document.getElementById('mainScreen').classList.add('hidden');
+            document.getElementById('psychScreen').classList.remove('hidden');
+            tg.HapticFeedback.impactOccurred('light');
+        }
+        
+        function goBack() {
+            // Скрываем все экраны
+            document.querySelectorAll('div[id$="Screen"]').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            
+            // Показываем главный экран
+            document.getElementById('mainScreen').classList.remove('hidden');
+            tg.HapticFeedback.impactOccurred('light');
+        }
+        
+        // ИИ-чат
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Добавляем сообщение пользователя
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Показываем индикатор загрузки
+            const loadingMsg = addMessage('🤖 Думаю над ответом...', 'ai');
+            
+            // Имитируем ответ ИИ через 1 секунду
+            setTimeout(() => {
+                loadingMsg.remove();
+                
+                // Простые ответы на частые вопросы
+                const responses = {
+                    'тревог': "При тревоге попробуйте технику 5-4-3-2-1: назовите 5 вещей, которые видите, 4 которых касаетесь, 3 слышите, 2 нюхаете, 1 чувствуете на вкус.",
+                    'спать': "При проблемах со сном: 1) за час до сна выключите все экраны, 2) примите теплый душ, 3) выпейте чай с ромашкой.",
+                    'отношен': "В отношениях используйте 'Я-сообщения'. Вместо 'Ты меня игнорируешь' скажите 'Я чувствую себя одиноко, когда долго нет ответа'.",
+                    'стресс': "При стрессе: 1) глубоко подышите 5 минут, 2) прогуляйтесь 15 минут, 3) запланируйте перерыв на отдых."
+                };
+                
+                let aiResponse = "Понимаю вашу ситуацию. Могу предложить несколько техник для улучшения состояния.";
+                
+                // Ищем ключевые слова
+                for (const [key, response] of Object.entries(responses)) {
+                    if (message.toLowerCase().includes(key)) {
+                        aiResponse = response;
+                        break;
+                    }
+                }
+                
+                // Если сообщение содержит кризисные слова
+                if (message.toLowerCase().includes('суицид') || message.includes('умру') || message.includes('невыносимо')) {
+                    aiResponse = "⚠️ Я заметила в вашем сообщении тревожные сигналы. Рекомендую немедленно связаться с психологом.";
+                    setTimeout(() => {
+                        openPsychologist();
+                    }, 2000);
+                }
+                
+                addMessage(aiResponse, 'ai');
+                
+                // Если ответ общий, предлагаем психолога
+                if (aiResponse.includes("Понимаю вашу ситуацию")) {
+                    setTimeout(() => {
+                        addMessage("Если нужна индивидуальная помощь, могу связать вас с психологом.", 'ai');
+                    }, 1000);
+                }
+                
+            }, 1000);
+            
+            tg.HapticFeedback.impactOccurred('soft');
+        }
+        
+        function quickQuestion(question) {
+            document.getElementById('messageInput').value = question;
+            sendMessage();
+            tg.HapticFeedback.impactOccurred('light');
+        }
+        
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.style.cssText = `
+                background: ${sender === 'user' ? '#4299e1' : '#e2e8f0'};
+                color: ${sender === 'user' ? 'white' : '#2d3748'};
+                padding: 10px 15px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                max-width: 80%;
+                margin-left: ${sender === 'user' ? 'auto' : '0'};
+                margin-right: ${sender === 'user' ? '0' : 'auto'};
+            `;
+            msgDiv.textContent = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return msgDiv;
+        }
+        
+        // Запись к психологу
+        function bookSession(type) {
+            currentSession = type;
+            
+            const sessions = {
+                'free': {
+                    title: '15 минут бесплатно',
+                    desc: 'Знакомство, первичная консультация',
+                    price: '💰 Бесплатно',
+                    typeText: 'Бесплатная консультация'
+                },
+                'paid': {
+                    title: '50 минут консультация',
+                    desc: 'Полная сессия, глубокая проработка',
+                    price: '💰 2000₽',
+                    typeText: 'Платная консультация'
+                }
+            };
+            
+            const session = sessions[type];
+            
+            document.getElementById('sessionTypeText').textContent = session.typeText;
+            document.getElementById('sessionTitle').textContent = session.title;
+            document.getElementById('sessionDesc').textContent = session.desc;
+            document.getElementById('sessionPrice').textContent = session.price;
+            
+            // Переходим на экран записи
+            document.getElementById('psychScreen').classList.add('hidden');
+            document.getElementById('bookScreen').classList.remove('hidden');
+            
+            tg.HapticFeedback.impactOccurred('medium');
+        }
+        
+        function confirmBooking() {
+            if (!currentSession) return;
+            
+            // Показываем подтверждение
+            tg.showPopup({
+                title: 'Подтверждение записи',
+                message: currentSession === 'free' 
+                    ? 'Психолог свяжется с вами в течение 2 часов для бесплатной 15-минутной консультации.'
+                    : 'Для оплаты 2000₽ вас перенаправит в Telegram.',
+                buttons: [
+                    {id: 'confirm', type: 'default', text: 'Подтвердить'},
+                    {id: 'cancel', type: 'destructive', text: 'Отмена'}
+                ]
+            }, (buttonId) => {
+                if (buttonId === 'confirm') {
+                    // Отправляем данные в Telegram бота
+                    if (currentSession === 'free') {
+                        tg.sendData(JSON.stringify({
+                            action: 'book_psychologist',
+                            type: 'free_15min',
+                            user: tg.initDataUnsafe.user
+                        }));
+                        
+                        tg.showAlert('✅ Запись подтверждена! Психолог свяжется с вами.');
+                    } else {
+                        tg.sendData(JSON.stringify({
+                            action: 'book_psychologist',
+                            type: 'paid_50min',
+                            user: tg.initDataUnsafe.user
+                        }));
+                        
+                        tg.showAlert('✅ Для оплаты следуйте инструкциям в чате с ботом.');
+                    }
+                    
+                    // Возвращаем на главный экран
+                    setTimeout(() => {
+                        document.getElementById('bookScreen').classList.add('hidden');
+                        document.getElementById('mainScreen').classList.remove('hidden');
+                    }, 2000);
+                }
+            });
+            
+            tg.HapticFeedback.impactOccurred('heavy');
+        }
+        
+        // Открываем главный экран при загрузке
+        window.onload = function() {
+            tg.ready();
+            tg.expand();
+        };
+    </script>
 </body>
 </html>
