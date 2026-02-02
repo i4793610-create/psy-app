@@ -3,7 +3,7 @@ body{margin:0;font-family:system-ui;background:#f4f6f3}
 .hero{display:flex;justify-content:space-between;align-items:center;
 background:linear-gradient(135deg,#e8efe6,#f7faf5);margin:12px;padding:20px;border-radius:20px}
 .hero-text h2{font-size:22px;font-weight:700}
-.hero-image{width:140px;height:180px;background:url('icons/illustration.svg') no-repeat center/contain}
+.hero-image{width:140px;height:180px;background:url('icons/illustration.png') no-repeat center/contain}
 .advantages{display:flex;gap:10px;margin:12px}
 .adv-card{flex:1;background:#fff;border-radius:16px;padding:12px;text-align:center}
 .adv-card img{width:36px}
